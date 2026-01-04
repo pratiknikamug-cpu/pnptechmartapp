@@ -1,0 +1,7 @@
+{
+  "name": "Copy of QuickMart Offline Self-Billing",
+  "description": "A high-performance offline retail self-billing app. Scan products, pay in-app, and generate secure exit tokens to skip queues.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
