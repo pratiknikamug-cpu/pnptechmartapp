@@ -12,6 +12,14 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
+export interface Reward {
+  id: string;
+  title: string;
+  description: string;
+  pointsRequired: number;
+  code: string;
+}
+
 export interface SaleRecord {
   id: string;
   invoiceNo: string;
@@ -20,11 +28,20 @@ export interface SaleRecord {
   taxTotal: number;
   timestamp: number;
   tokenId: string;
-  billAccessCode: string; // The unique code generated for the customer
-  status: 'pending' | 'paid';
+  billAccessCode: string;
+  status: 'pending' | 'paid' | 'verified'; // 'verified' is when staff scans the token
+  gatewayUsed: PaymentGatewayType;
 }
 
-export type PaymentGatewayType = 'DIRECT_UPI' | 'RAZORPAY_GATEWAY' | 'GOOGLE_PAY' | 'COUNTER_PAY';
+export type PaymentGatewayType = 
+  | 'DIRECT_UPI' 
+  | 'RAZORPAY_GATEWAY' 
+  | 'GOOGLE_PAY' 
+  | 'COUNTER_PAY' 
+  | 'CARD' 
+  | 'NETBANKING' 
+  | 'CRYPTO' 
+  | 'E_WALLET';
 
 export interface PaymentConfig {
   storeName: string;
@@ -32,22 +49,17 @@ export interface PaymentConfig {
   gstin: string;
   upiId: string;
   phoneNumber: string;
-  qrCodeData: string | null; // base64
+  qrCodeData: string | null; 
   gatewayType: PaymentGatewayType;
   razorpayKeyId?: string;
   razorpayKeySecret?: string;
   lastInvoiceIndex: number;
-  managerPin: string; // Secure manager-set PIN
+  managerPin: string; 
+  staffPin: string; 
 }
 
 export enum UserRole {
   CUSTOMER = 'customer',
-  ADMIN = 'admin'
-}
-
-export interface AppState {
-  products: Product[];
-  sales: SaleRecord[];
-  activeToken: string | null;
-  paymentConfig: PaymentConfig;
+  ADMIN = 'admin',
+  STAFF = 'staff'
 }

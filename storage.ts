@@ -27,7 +27,8 @@ const INITIAL_PAYMENT: PaymentConfig = {
   razorpayKeyId: '',
   razorpayKeySecret: '',
   lastInvoiceIndex: 1000,
-  managerPin: '' // Must be set by manager first
+  managerPin: '', // Must be set by manager first
+  staffPin: '' 
 };
 
 export const loadData = (): SavedData => {
